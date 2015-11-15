@@ -15,7 +15,7 @@ if we want to make up the date format we can use this trick:
 	split(date,d," ")
 	date = d[1] " " d[2] "," d[6]   #here string date will like: Nov 14, 2015
 
-Well, cammand date have some paramenters can output some format: date +%D  11/14/2015. 
+Well, cammand date have some paramenters can output some format: date +%D  #output:11/14/2015. 
 
 
 **2.substr**
@@ -38,7 +38,7 @@ Sometime, if we want to output a serial character, for example: 40 dashes.  In p
 now the variable `dashes` will have 40 dashes. easy too? 
 
 
-###Others
+### Others
 
 - [Keep growthing series in medium](https://medium.com/keep-learning-keep-growing/the-awkwardly-simple-solution-to-becoming-successful-986965ed5956)
 
