@@ -1,5 +1,5 @@
 body {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
   padding: 20px;
   margin: 0;
   font-weight: 400;
@@ -9,10 +9,27 @@ body {
     padding: 35px 50px;
   }
 }
+h2{
+	margin-top: 2em;
+	font-weight: 500;
+	-webkit-font-smoothing: initial;
+	border-bottom: 1px #e5e5e5 solid;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(229, 229, 229);
+}
+
+h3{
+	margin-top: 1.75em;
+	font-weight: 500;
+	-webkit-font-smoothing: initial;
+}
+
 h2,
 h3,
 h4,
 h5 {
+  color:#20515b;
   margin: 45px 0 25px;
 }
 img {
@@ -250,7 +267,7 @@ iframe {
   width: 100%;
 }
 article {
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
   .title {
     line-height: 1.4em;
@@ -309,10 +326,13 @@ section {
   margin: 0 auto;
   ul {
     list-style: none;
-    margin: 0;
+    margin-top:0;
+	margin-bottom:1em;
+	margin-left:1.5em;
     padding: 0;
     li {
       margin: 25px 0;
+	  margin-bottom:0.5em;
       .title {
         max-width: 100%;
         overflow: hidden !important;
@@ -323,7 +343,7 @@ section {
       a {
         text-decoration: none;
         border: 0;
-        color: #000;
+        color: #5667bd;
         box-sizing: border-box;
       }
       .post-date {
