@@ -1,6 +1,6 @@
 ---
 title: Lua Metatable Tuorial
-updated: 2016-05-31 12:00
+updated: 2016-05-30 12:00
 ---
 
 > 本文翻译自:[Lua Metatables Tutorial](http://nova-fusion.com/2011/06/30/lua-metatables-tutorial/)
