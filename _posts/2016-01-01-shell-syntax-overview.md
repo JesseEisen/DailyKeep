@@ -18,105 +18,105 @@ updated: 2016-01-01  16:21
 
 + ${paramter:-word} **Use Default Value**
 
-```
+```bash
 $ echo ${hello:-"world"} 
 $ world
 $ echo "$hello"
-$                   #hello is null, not assign
+                   #hello is null, not assign
 $ hello="Hello"
 $ echo ${hello:-"world"}
-$ Hello
+Hello
 ```
 + ${parameter:=word} **Assign Default Value**
 
-```
+```bash
 $ echo ${hello:="world"} 
-$ world
+world
 $ echo "$hello"
-$ world                
+world                
 $ hello="Hello"
 $ echo ${hello:="world"}
-$ Hello
+Hello
 ```
 
 + ${parameter:+word}  **Use Alternate Value**
 
-```
+```bash
 $ echo ${hello:+"world"} 
-$                      #nothing 
+                      #nothing 
 $ echo "$hello"
-$                      #still nothing
+                      #still nothing
 $ hello="Hello"
 $ echo ${hello:+"world"}
-$ world
+world
 $ echo "$hello"
-$ Hello
+Hello
 ```
 
 + {parameter:offset:length} **Substring Expansion**
 
-```
+```bash
 $ hello="HELLO"
 $ echo ${hello:1:2}
-$ EL
+EL
 ```
 
 + ${#parameter}  The length in characters of value in `parameter`
 + ${parameter#pattern} Match against the **beginning** of `parameter`
 + ${parameter##pattern}  The longest match is *deleted*
 
-```
+```bash
 $ path=/home/username/file.txt
 $ echo ${path#/}
-$ home/username/file.txt
+home/username/file.txt
 $ echo ${path#*e}
-$ username/file.txt
+username/file.txt
 # longest match
 $ echo ${path##*/}
-$ file.txt
+file.txt
 $ echo ${path##*e}
-$ .txt
+.txt
 ```
 
 + ${parameter%pattern} against the **end** of the `parameter`
 + ${parameter%%pattern} longest match is *deleted*
 
-```
+```bash
 $ path=/home/username/file.txt
 $ echo ${path%/*}
-$ /home/username
+/home/username
 $ echo ${path%e*}
-$ /home/username/fil
+/home/username/fil
 # longest match
 $ echo ${path%%/*}
-$                 # empty, delete all
+                 # empty, delete all
 $ echo ${path%%e*}
-$ /hom
+/hom
 ```
 
 + ${parameter/pat/string}  substitute pattern with string 
 + ${parameter//pat/string} substitute all pattern
 
-```
+```bash
 $ path=/home/username/file.txt
 $ echo ${path/e/E}
-$ /homE/username/file.txt
+/homE/username/file.txt
 $ echo ${path//e/E}
-$ /homE/usErnamE/filE.txt
+/homE/usErnamE/filE.txt
 ```
 + ${parameter/#pat/string} 
 + ${parameter/%pat/string}
 
-```
+```bash
 $ path=/home/username/file.txt
 $ echo ${path/#*e/E}
-$ E.txt
+E.txt
 $ echo ${path/%e*/E}
-$ homE
+homE
 # add prefix to array
 $ A=(hello world yeah)
 $ echo ${A/#/R}
-$ Rhello Rworld Ryeah
+Rhello Rworld Ryeah
 ```
 
 
