@@ -119,4 +119,65 @@ $ echo ${A/#/R}
 Rhello Rworld Ryeah
 ```
 
+## Glob Patterns
+
++ `*`: matches any string, including the null string
++ `?`: matches any single character
++ `[..]`: matches any **one of** the enclosed character
+
+```bash
+if [[ $filename = *.txt ]]; then 
+  echo "$filename is a txt"
+fi
+```
+
+## Extended Globs
+
+First we need open it. Use `shopt -s extglob`
+
++ ?(list)  matches **zero or one** occurrence of the given patterns
++ +(list)  matches **one or more** occurrence of the given patterns
++ *(list)  matches **zero or more** occurrence of the given patterns
++ @(list)  matches **one** of the given patterns
++ !(list)  matches **anything but the given patterns**
+
+The list inside the parenthness is a list of globs or extended globs separated by `|`.
+
+```bash
+echo !(*jpg | *bmp)
+```
+Another example:
+```bash
+if [[ $var == @(foo|bar|more) ]]; then
+      ...
+fi
+```
+
+## Regular Expressions
+
+It can only be match the pattern not for filename match. Bash use the `ERE` dialect. Bash
+support the `=~` to do a regular expression
+
+```bash
+langRegex='(..)_(..)'
+$ if [[ $LANG =~ $langRegex ]]
+then
+    echo "Your country code (ISO 3166-1-alpha-2) is ${BASH_REMATCH[2]}."
+    echo "Your language code (ISO 639-1) is ${BASH_REMATCH[1]}."
+else
+    echo "Your locale was not recognised"
+fi
+```
+
+The `$LANG` output like `en_US.UTF-8`. So the `.` is represent the single character.
+
+## Brach Expand
+Sometimes the expand may depend on you locale. See Example:
+
+```bash
+$echo th{e,a}n
+then than
+$echo {1..9}
+1 2 3 4 5 6 7 8 9
+```
 
