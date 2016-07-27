@@ -13,20 +13,19 @@ updated: 2016-01-01  16:21
 
 > It is rare to use `declare -i`, We often use the `(())` or `let`
 
-<hr>
 
 ## Parameter Expansion
 
 + ${paramter:-word} **Use Default Value**
 
 ```
-	$ echo ${hello:-"world"} 
-	$ world
-	$ echo "$hello"
-	$                   #hello is null, not assign
-	$ hello="Hello"
-	$ echo ${hello:-"world"}
-	$ Hello
+$ echo ${hello:-"world"} 
+$ world
+$ echo "$hello"
+$                   #hello is null, not assign
+$ hello="Hello"
+$ echo ${hello:-"world"}
+$ Hello
 ```
 + ${parameter:=word} **Assign Default Value**
 
