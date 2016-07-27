@@ -1,5 +1,5 @@
 body {
-  font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+  font-family:Roboto,-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI","Oxygen","Ubuntu","Cantarell","Open Sans",sans-serif;
   padding: 20px;
   margin: 0;
   font-weight: 400;
@@ -201,9 +201,10 @@ iframe {
 ul,
 ol {
   margin: 40px 0;
-  padding-left: 50px;
+  padding-left: 30px;
   li {
     word-wrap: break-word;
+	line-height: 1.5;
   }
   img {
     margin: 40px 0;
