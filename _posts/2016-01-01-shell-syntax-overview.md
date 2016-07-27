@@ -147,6 +147,7 @@ The list inside the parenthness is a list of globs or extended globs separated b
 echo !(*jpg | *bmp)
 ```
 Another example:
+
 ```bash
 if [[ $var == @(foo|bar|more) ]]; then
       ...
