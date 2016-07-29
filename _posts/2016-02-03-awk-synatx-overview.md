@@ -5,18 +5,18 @@ updated: 2016-02-03  16:21
 
 ## 1. Patterns
 
-+ BEGIN { statements } 
-** The statements are executed once before any input has been read **
-+ END { statements }
-** The statements are executed once after all input has been read **
-+ expression { statements }
-** The statements are executed at each iuput line where the `expression` is true
-+ /regular express/ { statements }
-** The statements are executed at each input line contains a string matched by the `regular expression`
-+ compound pattern { statements }
-** A compound pattern combines expression with &&, ||, ! and parenthese **
-+ pattern1, pattern2 { statements }
-** A range pattern matches each input line from a line matched by `pattern1` to the next line matched by `pattern2`
++ BEGIN { statements }    
+**The statements are executed once before any input has been read**
++ END { statements }    
+**The statements are executed once after all input has been read**
++ expression { statements }    
+**The statements are executed at each iuput line where the `expression` is true**
++ /regular express/ { statements }     
+**The statements are executed at each input line contains a string matched by the `regular expression`**
++ compound pattern { statements }     
+**A compound pattern combines expression with &&, ||, ! and parenthese**
++ pattern1, pattern2 { statements }     
+**A range pattern matches each input line from a line matched by `pattern1` to the next line matched by `pattern2`**
 
 ### BEGIN and END
 
@@ -59,13 +59,13 @@ $0 >= "M"            # string compare
 
 Here is the syntax of string-matching patterns. Notice that:**blanks are significant within regular expression**
 
-+ `/regexpr/`
++ `/regexpr/`     
 Matches when the current input line contains a substring matched by `regexpr`
 
-+ `expression ~ /regexpr/`
++ `expression ~ /regexpr/`     
 Matches if the string value of `expression` contains a substring matched by `regexpr`
 
-+ `expression !~ /regexpr/`
++ `expression !~ /regexpr/`     
 Matches if the string value of `expression` does not contian a substring matched by `regexpr`
 
 Here are some exmaples:
