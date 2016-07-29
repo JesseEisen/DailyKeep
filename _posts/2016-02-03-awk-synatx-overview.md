@@ -1,0 +1,77 @@
+---
+title: Awk Synatx OverView
+updated: 2016-02-03  16:21
+---
+
+## 1. Patterns
+
++ BEGIN { statements } 
+** The statements are executed once before any input has been read **
++ END { statements }
+** The statements are executed once after all input has been read **
++ expression { statements }
+** The statements are executed at each iuput line where the `expression` is true
++ /regular express/ { statements }
+** The statements are executed at each input line contains a string matched by the `regular expression`
++ compound pattern { statements }
+** A compound pattern combines expression with &&, ||, ! and parenthese **
++ pattern1, pattern2 { statements }
+** A range pattern matches each input line from a line matched by `pattern1` to the next line matched by `pattern2`
+
+### BEGIN and END
+
++ The statement in ` BEGIN` action are executed before awk reads any input.
++ If there is more tha one BEGIN, the associated actions are **executed in the order** in which they appear in the program
++ The statement in `END` action are executed after all input has been read.
++ multiple `END` do the similarly like `BEGIN`
+
+One common use of `BEGIN` action is to change the default way that input lines are split inti files. The built-in variable is `FS`.
+
+
+### Expressions
+
+Unlike many language, awk also has expressions for describing operations on strings. 
+
+The string `""`, which contains no characters, is called the `null string`.
+
+Any expression can be used as an operand of any operator. If an expression has a numeric value but an operator requires a string value, the numeric value is automatically transformed into a string. Similary, a string is converted into a number when a operator demands a numberic value.
+
+There are some comparsion operators, both the `number` and `string` can use them.
+
++ `<`   less than 
++ `<=`  less than or equal to
++ `==`  equal to
++ `!=`  not equal to
++ `>=`  greater than or equal to
++ `>`   greater than
++ `~`   matched by
++ `!~`  not matched by
+
+Here are some examples:
+
+```
+"Canada" < "China"   # string compare
+$2/$3 >= 0.5         # number compare
+$0 >= "M"            # string compare
+```
+
+### String-matching 
+
+Here is the syntax of string-matching patterns. Notice that:**blanks are significant within regular expression**
+
++ `/regexpr/`
+Matches when the current input line contains a substring matched by `regexpr`
+
++ `expression ~ /regexpr/`
+Matches if the string value of `expression` contains a substring matched by `regexpr`
+
++ `expression !~ /regexpr/`
+Matches if the string value of `expression` does not contian a substring matched by `regexpr`
+
+Here are some exmaples:
+
+```
+$4 ~ /Hello/  { ... }
+$0 !~ /World/ { ... }
+/Hell0/ { ... }
+```
