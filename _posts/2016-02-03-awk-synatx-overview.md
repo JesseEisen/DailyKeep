@@ -49,7 +49,7 @@ There are some comparsion operators, both the `number` and `string` can use them
 
 Here are some examples:
 
-```
+```bash
 "Canada" < "China"   # string compare
 $2/$3 >= 0.5         # number compare
 $0 >= "M"            # string compare
@@ -70,7 +70,7 @@ Matches if the string value of `expression` does not contian a substring matched
 
 Here are some exmaples:
 
-```
+```bash
 $4 ~ /Hello/  { ... }
 $0 !~ /World/ { ... }
 /Hell0/ { ... }
