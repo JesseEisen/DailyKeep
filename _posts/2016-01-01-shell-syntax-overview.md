@@ -208,30 +208,28 @@ if `rm` get wrong, The echo statement will exectue. But do not use too much cond
 
 Grouping Statemets use the `{...}` to surround the code. If we use the `conditional execution`. That maybe we need to use the `grouping statments`. For instance:
 
-```
+```bash
 grep -q hello "$target" && ! grep -q world "$target" && rm "$target" || echo "can not delete file"
 ```
 
 If the first grep command get failed. the `echo` will print `con not delete file`. That is not we want, so we need make the rm and echo be a grouping statement. change to that:
 
-```
+```bash
 grep -q hello "$target" && ! grep -q world "$target" && {rm "$target" || echo "can not delete file"}
 ```
 
 One more common use of the `grouping statements` is the error handle.
 
-```
+```bash
 cd "$dir" || {echo "please check the "$dir" >&2; exit 1;}
 ```
 
 
 ## Conditional Blocks 
 
-### if 
+Styles of `if`. 
 
-Here the style of `if`
-
-```
+```bash
 if commands
 the other commands
 fi
@@ -244,6 +242,19 @@ fi
 if commands; then
    other commands
 fi
+```
+The first such command is `test`(or known as [). And the advanced version is `[[`. The later is more versatility.
+
+You don't need an `if` when use `[`. It just take some paramters and the last parameter is `]`. 
+
+```bash
+$ [ "$myname" = "$yourname ]
+```
+
+`[[` takes some features than `[`. It support the `patterns`. For instance:
+
+```
+$[[ $filename = *.png ]] && echo "the file seems a picture"
 ```
 
 
