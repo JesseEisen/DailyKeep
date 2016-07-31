@@ -127,16 +127,16 @@ The pattern determines when the action is to be executed. There are many actions
 
 Expression is very simple. The first of the expression we talk about is the: `constants and variables`
 
-+ Constants
++ **Constants**
 
 String constant is enclosing a sequence of characters in quotation marks
 Numeric constant can like `1234` or `0.7E-1`
 
-+ Variable
++ **Variable**
 
 In awk, the type of variable is not declared, awk infer the type from context. **and uninitialized variable has the string value "" and the numeric value 0.**
 
-+ Built-In variable
++ **Built-In variable**
 
 | variable |  Meaning |
 | -------- | -------- |
