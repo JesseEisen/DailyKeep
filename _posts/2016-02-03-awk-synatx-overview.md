@@ -139,8 +139,12 @@ In awk, the type of variable is not declared, awk infer the type from context. *
 + Built-In variable
 
 | variable |  Meaning |
-|----------|----------|
-|ARGC      | number of command-line arguments|
-|ARGV      | array of command-line arguments|
-|FILENAME  | name of current input file|
+| -------- | -------- |
+| ARGC      | number of command-line arguments |
+| ARGV      | array of command-line arguments |
+| FILENAME  | name of current input file |
+| FNR       | record number in current file |
+| FS        | controls the input field separator |
+| NF        | number of fields in current record |
+| NR        | number of records read so far |
 
