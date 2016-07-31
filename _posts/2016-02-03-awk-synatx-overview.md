@@ -140,4 +140,7 @@ In awk, the type of variable is not declared, awk infer the type from context. *
 
 | variable |  Meaning |
 |----------|----------|
-|ARGC      | number of comman-line arguments|
+|ARGC      | number of command-line arguments|
+|ARGV      | array of command-line arguments|
+|FILENAME  | name of current input file|
+
