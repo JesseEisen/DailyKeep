@@ -75,3 +75,69 @@ $4 ~ /Hello/  { ... }
 $0 !~ /World/ { ... }
 /Hell0/ { ... }
 ```
+
+## Regular Expressions
+
+The syntax of RE is similar with other language. 
+
+The Parentheses are used in regular expressions to specify how components are groups. Here is an example:
+
+```bash
+(hello|Hello) (world|World) (good|bad)now
+
+#Will match the string
+
+hello world goodnow
+Hello world badnow
+```
+
+In regular expressions, the alternation operator `|` has the lowest precedence. so the `ab|cd*e$` is the same as `(ab)|(cd*e$)`
+
+We often **use the regular expression with the string-matching**. Next is some example to match the number.
+
+```bash
+/^[0-9]+$/  match any input line that consist of only digits
+/^[+-]?[0-9]+[.]?[0-9]*$/  match a floating piint number with optional sign and optional exponent.
+```
+
+## Range pattern
+
+A range pattern consists of two patterns separated by a comma, as in: `pat1, pat2`. For instance:
+
+```bash
+/Hello/, /World/ 
+```
+
+Match the line start with the first line contain Hello and end at the line contain the World, **if the World not found, it will matcht to the end of input.**
+
+Another example:
+
+```
+FNR==1, FNR==5 { print FILENAME: ": " $0}
+```
+
+Match the line between the line 1 and 5, The built-in variable is `FILENAME` which represent the name of current input file.
+
+
+## Actions
+
+The pattern determines when the action is to be executed. There are many actions in awk. Now we will introduce that:
+
+## Expression
+
+Expression is very simple. The first of the expression we talk about is the: `constants and variables`
+
++ Constants
+
+String constant is enclosing a sequence of characters in quotation marks
+Numeric constant can like `1234` or `0.7E-1`
+
++ Variable
+
+In awk, the type of variable is not declared, awk infer the type from context. **and uninitialized variable has the string value "" and the numeric value 0.**
+
++ Built-In variable
+
+| variable |  Meaning |
+|----------|----------|
+|ARGC      | number of comman-line arguments|
