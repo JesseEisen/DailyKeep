@@ -147,4 +147,73 @@ In awk, the type of variable is not declared, awk infer the type from context. *
 | FS        | controls the input field separator |
 | NF        | number of fields in current record |
 | NR        | number of records read so far |
+| OFMT      | outout format for number | 
+| OFS       | output field separator  |
+| ORS       | output record separator |
+| RLENGTH   | length of string matched by match function |
+| RS        | controls the input record separator |
+| RSTART    | start of string matched by match function |
+| SUBSEP    | subscript separator | 
+
++ Field Variables
+The fields of the current input line are called `$1`, `$2`, through `$NF`; `$0` refers to the whole line. Fields can also be specified by expressions. And a field variable referring to a nonexistent field has as it initial value the null string, e.g. $(NF+1).
+
+The number of fields can vary from line to line, but three is unsally an implementation limit of 100 fields per line.
+
++ Arithmetic Operators 
+
+Awk provides the usual `+, -, *, /, % and ^` arithmetic operators. **All arithmetic is done in floating point.**
+
++ Logical Operators
+
+THe logical operators `&&(AND)`, `||(OR)`, and `!(NOT)` are used to create logical expressions by combining other expressions. **Newlines may inserted after the && and || operators.**
+
++ Conditional expressions
+
+A conditional expression has the form:
+
+```bash
+expr1 ? expr2 : expr3
+```
+It just like the C conditional expression does.
+
++ Assignement Operators
+
+There are seven assignment operators that can be used in expressions called assignments. They are `=, +=, -=, *=, /=, %= and ^=`.They meanings are similar: **v op= e has the same effect as v = v op= e, except that v is evaluated once.**
+
+And awk also supports the `++`, `--`. They also do the same thing as C languange.
+
++ Built-in Arithmetic functions
+
+| FUNCTION |  VALUE RETURNED |
+| -------- | --------------- |
+| atan2(y,x) | arctangent of y/x in the range -$\pi$ to $\pi$ |
+| cos(x)  | cosine of x, with x in redians |
+| exp(x)  | exponential function of x, $e^x$ |
+| int(x)  | integer part of x, truncated towards 0 when x > 0 |
+| log(x)  | natural(base e) logarithm of x |
+| rand()  | random number r, where `$0 \leqslant x < 1$` |
+| sin(x)  | sine of x, with x in radians |
+| sqrt(x) | square root of x | 
+| srand(x) | x is new seed for rand() |
+
+Useful constants cna be computed with these functions: `atan2(0,-1)` gives $\pi$ and `exp(1)` gives `e`.
+
+The function `rand()` reuturn a pseudo-random floating point number greater or equal to 0 and less than 1. **Calling srand(x) sets the starting point of the generator from x**. Calling srand() sets the starting point from the time of day.
+
+The assignment:
+
+```bash
+ randint = int((n *rand() ) + 1)
+```
+
++ String Operators
+There is only one string operation , **concatenation**. It has no explict operator:
+
+```bash
+{ print NR ":" $0}
+```
+
+It will print the line with line number and a colon with no blanks.
+
 

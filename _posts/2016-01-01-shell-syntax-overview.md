@@ -26,6 +26,12 @@ $ echo "$hello"
 $ hello="Hello"
 $ echo ${hello:-"world"}
 Hello
+
+$ echo ${var-0}  #a slightly different notation
+0
+$ echo $var
+                 #var is empty
+$ 
 ```
 + ${parameter:=word} **Assign Default Value**
 
