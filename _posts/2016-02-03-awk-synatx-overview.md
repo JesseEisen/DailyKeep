@@ -156,6 +156,7 @@ In awk, the type of variable is not declared, awk infer the type from context. *
 | SUBSEP    | subscript separator | 
 
 + Field Variables
+
 The fields of the current input line are called `$1`, `$2`, through `$NF`; `$0` refers to the whole line. Fields can also be specified by expressions. And a field variable referring to a nonexistent field has as it initial value the null string, e.g. $(NF+1).
 
 The number of fields can vary from line to line, but three is unsally an implementation limit of 100 fields per line.
@@ -187,9 +188,9 @@ And awk also supports the `++`, `--`. They also do the same thing as C languange
 
 | FUNCTION |  VALUE RETURNED |
 | -------- | --------------- |
-| atan2(y,x) | arctangent of y/x in the range -$\pi$ to $\pi$ |
+| atan2(y,x) | arctangent of y/x in the range -\\(\pi\\) to \\(\pi\\) |
 | cos(x)  | cosine of x, with x in redians |
-| exp(x)  | exponential function of x, $e^x$ |
+| exp(x)  | exponential function of x, \\(e^x\\) |
 | int(x)  | integer part of x, truncated towards 0 when x > 0 |
 | log(x)  | natural(base e) logarithm of x |
 | rand()  | random number r, where `$0 \leqslant x < 1$` |
@@ -197,7 +198,7 @@ And awk also supports the `++`, `--`. They also do the same thing as C languange
 | sqrt(x) | square root of x | 
 | srand(x) | x is new seed for rand() |
 
-Useful constants cna be computed with these functions: `atan2(0,-1)` gives $\pi$ and `exp(1)` gives `e`.
+Useful constants cna be computed with these functions: `atan2(0,-1)` gives \\(\pi\\) and `exp(1)` gives `e`.
 
 The function `rand()` reuturn a pseudo-random floating point number greater or equal to 0 and less than 1. **Calling srand(x) sets the starting point of the generator from x**. Calling srand() sets the starting point from the time of day.
 
@@ -208,6 +209,7 @@ The assignment:
 ```
 
 + String Operators
+
 There is only one string operation , **concatenation**. It has no explict operator:
 
 ```bash
