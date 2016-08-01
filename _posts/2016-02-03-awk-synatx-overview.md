@@ -166,7 +166,7 @@ Awk provides the usual `+, -, *, /, % and ^` arithmetic operators. **All arithme
 
 + Logical Operators
 
-THe logical operators `&&(AND)`, `||(OR)`, and `!(NOT)` are used to create logical expressions by combining other expressions. **Newlines may inserted after the && and || operators.**
+THe logical operators `&&(AND)`, `||(OR)`, and `!(NOT)` are used to create logical expressions by combining other expressions. **Newlines may inserted after the `&&` and `||` operators.**
 
 + Conditional expressions
 
