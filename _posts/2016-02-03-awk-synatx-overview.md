@@ -218,4 +218,51 @@ There is only one string operation , **concatenation**. It has no explict operat
 
 It will print the line with line number and a colon with no blanks.
 
++ String as Regular Expressions
+
+In fact, any expression can be used as the right operand of these operators. Awk evaluates the expression, convert the value to a string if necessary,and interprets the string as a regular expression.
+
+```bash
+BEGIN { digits = "^[0-9]+$"}
+$2 ~ digits
+
+```
+This code will print all lines in which the second field is a string of digits. And the expression can be concatenated, so a regular expression can be built up from components. 
+
+```bash
+BEGIN {
+	sign = "[+-]?"
+	decimal = "[0-9]+[.]?[0-9]*"
+	fraction="[.][0-9]+"
+	exponent = "([eE]" sign "[0-9]+)?"
+	number = "^" sign "(" decimal "|" fraction ")" exponent "$"
+}
+
+$0 ~ number
+```
+
+In a matching exprssion, a quoted string like `"^[0-9]+$"` are equal to `/^[0-9]+$/`. **If the string in quotes is to match a literal occurrence of regular expression of a regular expression metacharacter, one extra backslash is needed to protecting backsalash itself. 
+
+```bash
+$0 ~ /(\+|-)[0-9]+/ 
+$0 ~ "(\\+|-)[0-9]+"  #this two are equivalent
+
+```
+## Builtin String Functions
+
+The function `index(s,t)` returns the leftmost position where the string `t` begin in `s`, or zero if `t` dose not occur in `s`.
+
+```bash
+index("banana","an") 
+# returns  2
+```
+
+The function `match(s,r)` finds the left most longest substring in the string `s` that matched by the regular expression `r`, return index or 0.
+
+```bash
+match($0, /[0-9]+[.]?[0-9]*/)
+```
+
+
+
 
