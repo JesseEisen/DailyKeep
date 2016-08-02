@@ -155,21 +155,21 @@ In awk, the type of variable is not declared, awk infer the type from context. *
 | RSTART    | start of string matched by match function |
 | SUBSEP    | subscript separator | 
 
-+ Field Variables
++ **Field Variables**
 
 The fields of the current input line are called `$1`, `$2`, through `$NF`; `$0` refers to the whole line. Fields can also be specified by expressions. And a field variable referring to a nonexistent field has as it initial value the null string, e.g. $(NF+1).
 
 The number of fields can vary from line to line, but three is unsally an implementation limit of 100 fields per line.
 
-+ Arithmetic Operators 
++ **Arithmetic Operators** 
 
 Awk provides the usual `+, -, *, /, % and ^` arithmetic operators. **All arithmetic is done in floating point.**
 
-+ Logical Operators
++ **Logical Operators**
 
 THe logical operators `&&(AND)`, `||(OR)`, and `!(NOT)` are used to create logical expressions by combining other expressions. **Newlines may inserted after the `&&` and `||` operators.**
 
-+ Conditional expressions
++ **Conditional expressions**
 
 A conditional expression has the form:
 
@@ -178,13 +178,13 @@ expr1 ? expr2 : expr3
 ```
 It just like the C conditional expression does.
 
-+ Assignement Operators
++ **Assignement Operators**
 
 There are seven assignment operators that can be used in expressions called assignments. They are `=, +=, -=, *=, /=, %= and ^=`.They meanings are similar: **v op= e has the same effect as v = v op= e, except that v is evaluated once.**
 
 And awk also supports the `++`, `--`. They also do the same thing as C languange.
 
-+ Built-in Arithmetic functions
++ **Built-in Arithmetic functions**
 
 | FUNCTION |  VALUE RETURNED |
 | -------- | --------------- |
@@ -208,7 +208,7 @@ The assignment:
  randint = int((n *rand() ) + 1)
 ```
 
-+ String Operators
++ **String Operators**
 
 There is only one string operation , **concatenation**. It has no explict operator:
 
@@ -218,7 +218,7 @@ There is only one string operation , **concatenation**. It has no explict operat
 
 It will print the line with line number and a colon with no blanks.
 
-+ String as Regular Expressions
++ **String as Regular Expressions**
 
 In fact, any expression can be used as the right operand of these operators. Awk evaluates the expression, convert the value to a string if necessary,and interprets the string as a regular expression.
 
@@ -248,6 +248,7 @@ $0 ~ /(\+|-)[0-9]+/
 $0 ~ "(\\+|-)[0-9]+"  #this two are equivalent
 
 ```
+
 ## Builtin String Functions
 
 The function `index(s,t)` returns the leftmost position where the string `t` begin in `s`, or zero if `t` dose not occur in `s`.
