@@ -258,11 +258,114 @@ index("banana","an")
 # returns  2
 ```
 
-The function `match(s,r)` finds the left most longest substring in the string `s` that matched by the regular expression `r`, return index or 0.
+The function `match(s,r)` finds the left most longest substring in the string `s` that matched by the regular expression `r`, return index or 0. It also sets the built-in variables `RESART` to the index and `RLENGTH` to the length of the matched substring.
 
 ```bash
 match($0, /[0-9]+[.]?[0-9]*/)
 ```
+
+The function `split(s,a,fs)` split the string `s` into the array `a` according to the separator `fs` and return the number of elements.
+
+The function `sprintf(format, expr1, expr2,...,exprn)` returns a string containing `expr1,expr2,...,exprn` formatted according to the `printf`.
+
+The function `sub(r,s,t)` first finds the leftmost longest substring matched by the regular expression `r` in target string `t`. It then replaces the substring by the substitution string `s`. The `sub` function returns the number of substitutions made. The function `sub(r,s)` is synonym for `sub(r,s,$0)`.
+
+```bash
+sub(/(an)+/,"AN","banana") 
+#return  bANa
+sub(/(an)*/,"AN","banana")
+#return ANbanana
+```
+
+The `leftmost longest` means that the leftmost match is found first.
+
+```bash
+sub(/(an)+/,"AN","banbana")
+#return bANbana
+```
+
+The function `gsub(r,s,t)` is similar, except that it successively replaces the leftmost longest nonoverlapping substrings matched by `r` with `s` in `t`; it returns the number of substitutions made.
+
+```bash
+gsub(/an/, "AN","banana")
+#return bANANa
+```
+
+In a substitution performed by either `sub(r,s,t)` or `gsub(r,s,t)`, any occurrence of the character `&` in `s` will be replaced by the substring matched by `r`
+
+```bash
+gsub(/a/,"&A&","banana")
+#return baAanaAanaAa
+```
+
+The function `substr(s,p)` return the suffix of `s` that begins at position `p`. if `substr(s,p,n)` is used, only the first `n` characters of the suffix are returned. If the suffix is shorter than `n`, then the entire suffix is returned. 
+
+```bash
+$5 = substr("banana",2,3)
+print $5
+#return ana
+```
+
+Strings are concatenated merely by writing them one after another in an expression. we can use that to join row to line. 
+
+```bash
+{s = s substr($1,1,3) " " }
+END {printt substr(s,length(s)-1)}
+```
+
+It will concatenate $1 of each line into one line. That may help you in sometimes.
+
+> There are two idioms for coercing an expression of one type to the other
+> number ""   concatenate a null string to number to coerce it to a string
+> string + 0  add zero to  string to coerce it to a number
+
+
+## Control-Flow Statements
+
+All of these control-flow statemens were adopted from `C`. There are `if-else`, `for`,`while`,`do-while`.
+
++ **if-else**
+
+```bash
+if (expression)
+	statement1
+else if (expression)
+	statement2
+else
+	statement
+```
+
++ **while loop**
+
+```bash
+while (expression)
+	statement
+```
+
++ **for loop**
+
+```bash
+for(expression1; expression2;expression3)
+	statement
+```
+
++ **do while**
+
+```bash
+do
+	statement
+while (expression)
+```
+
+There are two statments for modifying how loops cycle: `break` and `continue`.
+
++ **next**   
+The next statement causes awk to fetch the next input and begin matching patterns starting from the first pattern-action statement.
+
++ **exit**   
+In an `END` action, the `exit` statement causes the program to terminate. In any other action, it causes the program to behave as if the end of the input had occurred; no more input and the `END` actions if any, are executed.
+
+> A semicolon by itself denotes the empty statement.
 
 
 
