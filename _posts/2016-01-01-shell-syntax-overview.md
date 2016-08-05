@@ -263,4 +263,14 @@ $ [ "$myname" = "$yourname ]
 $[[ $filename = *.png ]] && echo "the file seems a picture"
 ```
 
+### Some operators test support
 
++ `-z STRING` : True if the string is empty
++ `-n STRING` : True if the string is not empty
+
+String Operators:
+
++ `STRING = STRING` 
++ `STRING != STRING` 
++ `STRING < STRING` 
++ `STRING > STRING`
