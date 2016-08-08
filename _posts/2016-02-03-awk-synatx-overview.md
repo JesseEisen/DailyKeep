@@ -347,6 +347,11 @@ while (expression)
 ```bash
 for(expression1; expression2;expression3)
 	statement
+
+#or 
+
+for (variable in array)
+    statment
 ```
 
 + **do while**
@@ -368,5 +373,55 @@ In an `END` action, the `exit` statement causes the program to terminate. In any
 > A semicolon by itself denotes the empty statement.
 
 
+## Arrays
+Awk provides one-dimensional arrays for storing strings and numbers. Arrays and array elements need not be declared, nor is there any need to specify how many elements an array has.
 
+For instance:
 
+```bash
+    { x[NR] = $0}
+END { for(i = NR; i>0; i--) print x[i]}  # this store each line in x, and print them out
+
+## associative arrays
+{x["good"] += 1}
+```
+
+If we had written `x[good]` instead of `x["good"]`, the expression would have used the value of the variable `good` as the subscript, and since the variable is not initilized, the value would have been accumlated in `x[""]`
+
+If we use the `for loop` with array, the order in which the subscript are considered is implenmentation dependent. Result are unpredicatable if new elements are added to the array by `statement`
+
+You can determine whether a particular subscript occurs in an array with the expression:
+
+```bash
+subscript in A
+```
+
+The good practise to use this determine the element, we can in this way:
+
+```bash
+if("good" in x) ...
+
+#do not use this
+
+if(x["good"] != "")
+```
+
+The second way may has the side effect of creating `x["good"]`.And it neither is a test of whether the array `x` contains an element with value `good`
+
+### delete statement
+
+```bash
+delete array[subscript]
+```
+
+### split function
+ 
+The `split(str,arr,fs)`, split the string with field separator, if no third argument, FS is used. For instance
+
+```bash
+split("8/8/16",arr,"/")
+#return arr and the value is  
+arr["1"] = 8, arr["2"]= 8, arr["3"]= 16
+```
+
+Notice: 01 is not the same string as 1 and the string 10 comes before the string 2.
