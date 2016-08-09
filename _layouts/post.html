@@ -23,19 +23,18 @@ layout: default
 
 	{{ content }}
 
-</article>
-
+<br>
+<br>
 <form method="POST" action="https://api.staticman.net/v1/entry/eduardoboucas/staticman/gh-pages">
-	  <!-- e.g. "2016-01-02-this-is-a-post" -->
-	    <input name="options[slug]" type="hidden" value="{{ page.slug }}">
 
-		  <input name="fields[name]" type="text">
-		    <input name="fields[email]" type="email">
-			  <textarea name="fields[message]"></textarea>
+  <input name="Fields[name]" type="text">
+  <input name="Fields[email]" type="email">
+  <textarea name="Fields[comment]"></textarea>
 
-			    <button type="submit">Go!</button>
+  <button type="submit">Submit Comment</button>
 </form>
 
+</article>
 
 <div class="back">
 	<a href="{{site.baseurl}}/">Back</a>

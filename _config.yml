@@ -33,7 +33,7 @@ gems:
   - jekyll-sitemap
 
 # staticman
-allowedFields: ['name','email','comment']
+Fields: [ "name","email","comment" ]
 branch: 'gh-pages'
 format: 'json'
 moderation: true
