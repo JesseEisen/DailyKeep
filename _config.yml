@@ -32,6 +32,13 @@ exclude:            [ "LICENSE", "README.md", "CNAME", "vendor", "Gemfile" ]
 gems:
   - jekyll-sitemap
 
+# staticman
+allowedFields: ['name','email','comment']
+branch: 'gh-pages'
+format: 'json'
+moderation: true
+path: _data/post/{options.slug}
+
 compress_html:
     clippings:      all
     ingore:
