@@ -5,6 +5,8 @@ updated: 2016-02-15  16:21
 
 ## List
 
+### Base
+
 > Syntax   
 > [value, value, ...]   
 > list([iterable])
@@ -32,6 +34,18 @@ a = a + b
 + `pop([index])` -- removes and returns the item at index. With no argument it removes and returns the last element of the list.   
 + `remove(value)` -- removes the first occurrence of the specified value. If the provided value cannot be found, a ValueError is raised.  
 + `reverse()` -- reverses the list in-place and **returns None**
++ `reversed(number)` -- function which returns an iterator to the reversed list.  
+
+```python
+vals=[1,2,3,4]
+vals.reverse()
+# if you use val_r = vals.reverse(), The val_r is None
+
+val_r = reversed(vals)
+val_r 
+#[4,3,2,1]
+```
+
 + `sort()`  -- sorts the list **in numerical and lexicographical** order and return **None**
 
 ```python
@@ -79,7 +93,7 @@ del a[:]
 # a = []
 ```
 
-+ Copying  -- The default assignment `=` assigns a reference of the original list to the new name. **That is the original name and new name are both pointing to the same list object. 
++ Copying  -- The default assignment `=` assigns a reference of the original list to the new name. **That is the original name and new name are both pointing to the same list object**. 
 
 ```python
 b = a
@@ -105,6 +119,117 @@ import copy
 nlist = copy.deepcopy(old_list)
 #inserts copies of the objects found in the origin list
 ```
+
+### Checking if list is empty
+
+Not use the `len`, just use the `list` or `not list`
+
+```python
+lst = []
+if not lst:
+	print("list is empty")
+```
+
+### Any and All
+
+`all()` to determine if **all the values** in an iterable evaluate to True
+
+```python
+nums=[1,2,1,2]
+all(nums)
+# True
+nums=[1,1,0,1]
+all(nums)
+# False
+chars =['a','b','c','d']
+all(chars)
+# True
+```
+`any()` determines if one or more values in an iterable eveluate to True
+
+```python
+nums = [1,1,0,1]
+any(nums)
+# True
+vals = [None, None, None, False]
+any(vals)
+# False
+```
+
+We can use any iterable, including generators.
+
+```python
+vals = [1,2,3,4]
+any(val > 12 for val in vals)
+# False
+any((val * 2) > 6 for val in vals)
+# True
+```
+
+### Concatenate and Merge lists
+
++ Merge:   `merged = list1 + list2`
++ zip:    return a list of tuples
+
+```python
+alist = ['a1', 'a2', 'a3' ]
+blist = ['b1', 'b2', 'b3' ]
+
+for a, b in zip(alist, blist):
+	print(a,b)
+```
+
+### Iterating over a list
+
+We can use `for` to iterable a list:
+
+```python
+for (index, item) in enumerate(my_list):
+    print('The item in position {} is: {}'.foramt(index,item))
+
+for item in my_list:
+    print(item)
+
+```
+
+### Named slices
+
+```python
+nums = [x for x in range(9)]
+print(nums)
+s = slice(3,6)
+print(nums[s])  # care the usage
+#[3,4,5]
+```
+
+### Difference between two lists
+
+Three ways
+
+```python
+a = [1,2,3]
+b = [1,2]
+list(set(a) - set(b))
+# [3]
+
+list(set(a) ^ set(b))
+# [3]
+
+[elem for elem in a if not in b]
+# [3]
+```
+
+### Convert list of string to single string
+
+We just use the `join` to do it
+
+```python
+a = ["This", "is", "a", "list"]
+" ".join(a) # The separator can be other
+
+# This is a list
+```
+
 
 
 
