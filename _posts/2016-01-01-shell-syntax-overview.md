@@ -279,14 +279,14 @@ String Operators:
 
 Also there are some useful operator that supported only by `[[`.Not string comparison like with `[`, but pattern matching is performed   
 
-+ STRING = PATTERN    
++ `STRING = PATTERN`    
   True if the string matches the glob pattern.
-+ STRING != PATTERN    
++ `STRING != PATTERN`    
   True if the string does not match the glob pattern.   
-+ (EXPR)   
++ `(EXPR)`   
   Parentheses can be used to change the evaluation precedence.   
-+ EXPR && EXPR   
-+ EXPR || EXPR
++ `EXPR && EXPR`   
++ `EXPR || EXPR`
 
 > Whenever you're making a Bash script, you should always use [[ rather than [.
 > Whenever you're making a shell script, which may end up being used in an environment where Bash is not available, you should use [
