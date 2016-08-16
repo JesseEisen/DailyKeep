@@ -267,6 +267,8 @@ $[[ $filename = *.png ]] && echo "the file seems a picture"
 
 + `-z STRING` : True if the string is empty
 + `-n STRING` : True if the string is not empty
++ `-e FILE`   : True if file exists
++ `-f FILE`   : True if file is a regular file
 
 String Operators:
 
@@ -274,3 +276,98 @@ String Operators:
 + `STRING != STRING` 
 + `STRING < STRING` 
 + `STRING > STRING`
+
+Also there are some useful operator that supported only by `[[`.Not string comparison like with `[`, but pattern matching is performed   
+
++ STRING = PATTERN    
+  True if the string matches the glob pattern.
++ STRING != PATTERN    
+  True if the string does not match the glob pattern.   
++ (EXPR)   
+  Parentheses can be used to change the evaluation precedence.   
++ EXPR && EXPR   
++ EXPR || EXPR
+
+> Whenever you're making a Bash script, you should always use [[ rather than [.
+> Whenever you're making a shell script, which may end up being used in an environment where Bash is not available, you should use [
+
+### Conditional Loops(while, until and for)
+
++ while 
+
+```bash
+while True; do
+  echo "Infinite loop"
+done
+
+#another
+while ! ping -c 1 -W 1 1.1.1.1; do
+  echo "still waiting for 1.1.1.1"
+done
+```
+
++ for
+
+```
+for ((i=10; i>0;i--));do
+  echo "$i empty cans of beer"
+done
+
+for i in {10..1}
+do echo "$i empty cans of beer"
+done
+```
+
++ until  
+  This is barely ever used, if only because it is pretty much exactly the same as `while !...`
+
+### Choices(case and select)
+
++ case 
+
+The general framework is: 
+
+```bash
+case $xxx in
+	xx) 
+	    xxxx
+		;;
+	xx)
+	    xxxx
+		;;
+	xx) 
+		xxxx
+		;;
+esac
+```
+Each choice in a `case` statement consists of a pattern, a right parenthesi, a block of code that is to executed if the string matches one of those patterns, and two semi-colons to denote the end of the block of code. A left parenthesis can be added to the left of the pattern. Using `;&` instead of `;;` will grant you the ability to fall-through the `case` matching in bash,zsh and ksh.
+
+Therefore, we can use the `*` pattern in the end to match any case that has not been caught by the other choices.
+
++ select
+
+This statement smells like a loop and is a convenience statement for generating a menu of choices that the user can choose from
+
+```bash
+select choice in Apple Pears Crisps Lemons Kiwis; do
+ if [[ $choice = Crisps ]]; then 
+   echo "Crisps are not fruit"; break; fi
+ echo "Errr... no. Try again."
+done
+```
+
+## Arrays
+
+### Creating Array
+
+There are several ways you can create or fill your array with data. The easiest way to create a simple array with data is by using the `=()` syntax:
+
+```bash
+names=("jesse" "bob" "$username")
+#or
+names=([0]="jesse" [2]="bob" [30]="peter")
+#or 
+names[0]="jesse"
+```
+
+
