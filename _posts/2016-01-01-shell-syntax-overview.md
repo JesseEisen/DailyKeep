@@ -358,7 +358,7 @@ done
 
 ## Arrays
 
-### Creating Array
+### Creat ing Array
 
 There are several ways you can create or fill your array with data. The easiest way to create a simple array with data is by using the `=()` syntax:
 
@@ -368,6 +368,40 @@ names=("jesse" "bob" "$username")
 names=([0]="jesse" [2]="bob" [30]="peter")
 #or 
 names[0]="jesse"
+```
+Here is a example to read the output from find command, and save the output into an array:
+
+```bash
+files=()  #an empty array
+while read -r -d ''; do
+  files+=("$REPLY")
+done < <(find ./  -print0)
+```
+
+The `$REPLY` is the parameter that read save the result in it. And the `+=()` will add elements into the end of array. The last `<()` is the process substitute.
+
+### Using Arrays
+
+We can use the `declare -p  arrayname` to see the content in the array. Or you can use `${array[@]}` to print all element in array.
+
+```bash
+printf '%s\n' "${myarray[@]}"
+# or 
+declare -p myarray
+
+```
+Some times we can use `for` to travel array.Like:
+
+```bash
+for name in myarray; do
+  echo "$name"
+done
+```
+
+a `for` loop offers the ultimate flexibility,but `printf` and its implicit looping over arguments can cover many of the simpler cases.
+
+```bash
+printf "%s\0" "${myarray[@]}" > myfile
 ```
 
 
