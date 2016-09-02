@@ -358,7 +358,7 @@ done
 
 ## Arrays
 
-### Creat ing Array
+### Creating Array
 
 There are several ways you can create or fill your array with data. The easiest way to create a simple array with data is by using the `=()` syntax:
 
@@ -403,5 +403,54 @@ a `for` loop offers the ultimate flexibility,but `printf` and its implicit loopi
 ```bash
 printf "%s\0" "${myarray[@]}" > myfile
 ```
+
+### Expanding indices
+
+Sometimes we use `${array[@]}` to get all the array elements. But when we want to get the index of the array. we do have two ways. First is we expand the array into an `indices`, and the next is use the length of array and do arithmetic.
+
+Let's take a look:
+
+```bash
+first=(hello bash)
+last=(world shell)
+
+for i in "${!first[@]}"; do 
+	echo "${first[i]} ${last[i]}"
+done
+
+# the output
+hello world
+bash shell
+```
+
+The syntax `${!first[@]}` will expand the array into `indices`, and the index will return. Now if we do like the `C` programming language. We can use the length
+
+```bash
+for ((i=0; i<${#array[@]}; i+=1)); do
+   echo "${array[i]} and ${array[i+1]}"
+done
+```
+
+This also works. 
+
+### Sparse arrays
+
+Normally array is sequencely, but in bash, array can have `holes`. Here is an example.
+
+```bash
+$a=(a b c d)
+$a[26]="z"
+$declare -p a
+declare -a a='([0]="a" [1]="b" [2]="c" [3]="d" [26]="z")'
+```
+
+Here are some good practices:
+
++ Don't assume that your indices are sequential.
++ If the index values matter, always iterate over the indices instead of making assumptions about them.
++ If you loop over the values instead, don't assume anything about which index you might be on currently.
++ In particular, don't assume that just because you're currently in the first iteration of your loop, that you must be on index 0!
+
+
 
 
