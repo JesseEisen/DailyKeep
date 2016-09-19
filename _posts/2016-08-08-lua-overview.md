@@ -196,3 +196,104 @@ nil
 > true and print("hello")
 hello
 ```
+
+The `or` binary operator also does not necessarily return a boolean value (see notes for and above). If the first argument is true it is returned, otherwise the second argument is returned. 
+So, a boolean is only returned if the first argument is true or the second argument is a boolean.
+
+```lua
+>= true or false
+true
+>= nil or "hello"
+hello
+```
+
+Sometimes, this can be a very useful property. For example. setting default values in a function:
+
+```lua
+> function foo(x)
+>>   local value = x or "defalut"  -- if argument x is false or nil, value becomes "default"
+>>   print(value,x)
+>>end
+
+> foo()
+default nil
+> foo(true)
+true  true
+```
+
+### Ternary operators  三元
+
+```lua
+value = condition and trueval or falseval
+```
+
+## Control Structure
+
+### if 
+
+Here is the base condition:
+
+```lua
+if condition then
+        block
+elseif condition2 then
+        block
+else 
+        block
+end
+```
+
+### while and repeat
+
+```lua
+while condition do 
+        block
+end
+
+repeat 
+        block
+until condition
+```
+
+### for 
+
++ numeric for
+
+```lua
+for variable = start, stop, step do
+        block
+end
+```
+
+Here is a example:
+
+```lua
+for i = 3, -3, -1 do
+    print(i)
+end
+```
+
++ iterator for
+
+```lua
+for var1, var2,var3 in iterator do
+   block
+end
+```
+
+### break statement
+do the same as C
+
+### continue statement
+
+Lua use the `goto` statement to implenment the continue, see:
+
+```lua
+for i =1, 10 do
+   if i > 3 and i < 6 then goto continue end
+   print(i)
+   ::continue::
+end
+```
+
+But Lua5.1 do not have the goto statement.
