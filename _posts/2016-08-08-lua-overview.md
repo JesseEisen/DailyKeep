@@ -297,3 +297,186 @@ end
 ```
 
 But Lua5.1 do not have the goto statement.
+
+### condition
+
+Sometimes, we want to use the `and or` to do the ternary operator thing. we should pay attention.
+if we use this in our program:
+
+```lua
+> condition = true
+>= condition and false or true
+true
+```
+
+This condition will never act the right `or` expression. because the and has a higher precedence than `or`
+so we can change to this:
+
+```lua
+> condition = true
+>= not condition and true or false
+false
+```
+
+## Table 
+
+Table are created using `table constructors`, which are defined using curly brackets.
+
+```lua
+> t = {}
+> print(t)
+table:0035AE18
+```
+
+### using tables
+
+To access the value associated with the key in a table you can use the `table[key] = value`
+
+```lua
+> t = {}
+> t["foo"] = "bar"
+> =t["foo"]
+bar
+> t["bar"]  --not an error, return nil instead
+nil
+```
+
+**Any value can be used as a key, just make sure it's not `nil` or `NAN`
+
+```lua
+> t = {}
+> k = {}
+> f = function() end
+> t[f] = 456
+> =t[f]
+456
+```
+
+There is a shortcut for use string as key, like:
+
+```lua
+> t = {}
+> t.foo = 123
+> =t.foo
+123
+> =t["foo"]
+123
+```
+Another shortcut
+
+```lua
+> t = {foo = "bar"} -- not [foo]="bar", same as ["foo"]="bar"
+> =t["foo"]
+bar
+```
+
+To loop over all the key/value pairs in a table, use the `pairs` iterator
+
+```lua
+> t = {foo = "bar", [123] = 456}
+> for key,value in pairs(t) do print(key,value) end
+foo bar
+123 456
+```
+
+> The order when looping with pairs is undefined. Just because you added one item after adding another doesn't mean that's the order they'll be in with pairs.
+>Inside a pairs loop, it's safe to reassign existing keys or remove them (by assigning nil to them), but not to add new keys (that had a nil value previously). 
+
+### Tables as arrays
+
+There is no array type in lua, so we can treat table as array. see
+
+```lua
+> t = {'a', 'b', 'c'}
+>=t[1]
+a
+```
+
+We still can mix the array syntax with the usual key=value syntax:
+
+```lua
+> t = {"a", "b", [123]="foo", "c", name="bar", "d", "e"}
+> for k,v in pairs(t) do print(k,v) end
+1       a
+2       b
+3       c
+4       d
+5       e
+123     foo
+name    bar
+```
+
+To envalue the `length` of table, use `#`, 
+
+```lua
+> t = {1,2,3,4,5}
+> #t
+5
+```
+
+### Table values are reference
+
+When you pass a table to a function or store it in a new variable, etc. a new copy of that table is not created. Tables do not act like numbers in these cases. Instead the variable or function becomes a reference to the original table. 
+This is much like a pointer in the C Language. For example:
+
+```lua
+> t = {}
+> u = t
+> u.foo = "bar"
+> = t.foo
+bar
+> function f(x) x[1] = 2 end
+> f(t)
+> = u[1]
+2
+```
+
+A related thing to remember is that table comparison works by reference. Comparing tables using == will return false even if the two tables have the same contents. They must actually be references to the same table.
+
+```lua
+> t1= {1,2,3}
+> u = t1
+> t2 = {1,2,3}
+> t1 == u
+true
+> t2 == t1
+false
+```
+
+[copy a table manually](http://lua-users.org/wiki/CopyTable)
+
+
+### Table as unordered sets
+
+Referring this post for more detial. [sets and bags](https://www.lua.org/pil/11.5.html)
+
+## Function 
+
+Function are created with the `function` keyword as follows:
+
+```lua
+function (args) body end
+```
+
+### Function are values
+
+The function block is an expression (in the same sense that "1 + 2" is an expression) that evaluates to a new function value. A function value can be called by using the ( ) operator, which runs the code in the function. The ( ) pair goes after the function expression, and optionally contains a comma-separated list of arguments.
+
+One thing to remember is that like tables, functions are passed by reference. For example, when you assign a variable containing a function to another variable, you just create a new "handle" to the same function.
+
+### Function arguments
+Functions can take 0 or more arguments. These are values given to the function when it's called, that the code stored in the function can use. Inside the function, the parameters look like variables, except they only exist inside the function.
+
+```lua
+> g = function(value)
+>>print(value)
+>>end
+> =g()
+nil
+> =g "example" -- the () can be omitted if you have one quoted string arg
+example
+> =g {}
+table: 0x820ee0
+```
+
+
