@@ -518,9 +518,9 @@ If you're used to a language (like Python) that returns multiple values by stori
 
 ### Return skips other code
 
-Use `return` to return from function, like the `exit` in c
+Use `return` to return from function, like the `exit` in c.
 
-A good example is `table.sort`, which can optionally take a custom less than function
+A good example is `table sort`, which can optionally take a custom less than function
 
 ```lua
 > list = {{3},{5},{2},{-1}}
