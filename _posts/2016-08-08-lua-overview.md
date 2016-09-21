@@ -520,8 +520,6 @@ If you're used to a language (like Python) that returns multiple values by stori
 
 Use `return` to return from function, like the `exit` in c
 
-### Function as parameters
-
 A good example is `table.sort`, which can optionally take a custom less than function
 
 ```lua
