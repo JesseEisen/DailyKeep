@@ -479,4 +479,138 @@ example
 table: 0x820ee0
 ```
 
+# Function return values
+
+Function can also return any amount of the values. 
+
+```lua
+> f = function()
+>> return "x", "y", nil, "z"
+>> end
+> t = {f()}
+> #t
+4
+> t[3]
+nil
+```
+
+if the function returns nils, since nil in tables is considered "no value", , the # operator can't be reliably used to get the number of values because it's undefined if an array has "holes".
+
+Now if you want to function discard return value, you can use the `()`.
+
+```lua
+> f = function()
+>> return "x", "y", "z" 
+>> end
+> a,b = (f()) --wrapping a function call in () discards multiple return values
+x, nil
+>= "w"..f() -- using a function call as a sub-expression discards multiple returns
+wx
+> print("w", f())
+w x y z
+> print(f(), "w") -- same when used as the arg for another function call
+x w
+> print("w", (f())) 
+w x 
+```
+
+If you're used to a language (like Python) that returns multiple values by storing them in a "tuple" type, that's not how Lua works. Lua functions actually return separate values, instead of a single container.
+
+### Return skips other code
+
+Use `return` to return from function, like the `exit` in c
+
+### Using functions as parameters
+
+A good example is `table.sort`, which can optionally take a custom "less than" function
+
+```lua
+> list = {{3},{5},{2},{-1}}
+> table.sort(list, function(a,b) return a[1] < b[1] end)
+> for i,v in ipairs(list) do print(v[1]) end
+-1
+2
+3
+5
+```
+
+### value number of arguments
+
+A function can have `...` at the end of its argument list.Then you can use `...` inside the body of the function, and it will
+envalue to the multiple values
+
+```lua
+> f = function(x, ...)
+>> x(...)
+>> end
+> f(print, "1 2 3")
+1 2 3
+```
+
+Using `select` function, which takes a number and a variable number of args, and **returns the args starting from that index**. It can also take "#" as the index and return the amount of args:
+
+```lua
+> f=function(...) print(select("#", ...)) print(select(3, ...)) end
+> f(1,2,3,4,5)
+5
+3 4 5
+```
+
+`...` can be packed into a table, the most safe way to do that is:
+
+```lua
+> f=function(...) tbl=table.pack(...) print(tbl.n, table.unpack(tbl,1,tbl.n))end
+> f("a",nil,"c")
+3 a nil c
+```
+
+### named functions
+
+function `function f(...)  end` equal to `f= function(...) end`
+
+### Recursion and tail calls
+
+The `mutually recursive` function is easy to understand, but when the level is too large, and will make the `call stack` full.so `tail recursive` is recommanded
+
+```lua
+function factorial_helper(i, acc)
+  if i == 0 then
+    return acc
+  end
+  return factorial_helper(i-1, acc*i)
+end
+
+function factorial(x)
+  return factorial_helper(x, 1)
+end
+```
+
+Not all non-tail called recursive functions are bad, it's often the most natural solution if the calls won't get very deep. But if you are expecting hundreds of iterations or more, you should probably consider using tail recursion or just a loop.
+
+
+## Scope 
+
+To create a local variable, add the `local` keyword before the assignment, you don't need the local keyword any more when changing the variable.
+
+```lua
+local a = 5
+a = 6 --changes the local a, doesn't create a global
+```
+
+### local function syntax sugar
+
+```lua
+local function f() end
+
+-- is equivalent to
+
+local f
+f = function() end
+
+-- not
+
+local f = function() end
+```
+
+the difference between the last two examples is important: the local variable still doesn't exist to the right of the = that gives it the initial value. So if the contents of the function used f to get a reference to itself, it will correctly get the local variable in the first and second versions, but the third version will get the global f (which will be nil, if not a completely unrelated value set by some other code).
 
