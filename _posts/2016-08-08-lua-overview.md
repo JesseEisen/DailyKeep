@@ -522,7 +522,7 @@ Use `return` to return from function, like the `exit` in c
 
 ### Using functions as parameters
 
-A good example is `table.sort`, which can optionally take a custom "less than" function
+A good example is `table.sort`, which can optionally take a custom less than function
 
 ```lua
 > list = {{3},{5},{2},{-1}}
