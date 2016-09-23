@@ -612,3 +612,71 @@ local f = function() end
 
 the difference between the last two examples is important: the local variable still doesn't exist to the right of the = that gives it the initial value. So if the contents of the function used f to get a reference to itself, it will correctly get the local variable in the first and second versions, but the third version will get the global f (which will be nil, if not a completely unrelated value set by some other code).
 
+### Clousers
+
+Functions can use local variables created outside of them. These are called upvalues. A function that uses upvalues is called a closure:
+
+```lua
+local x = 5
+
+local function f()
+  print(x)
+end
+
+f() ->5
+x = 6
+f() ->6
+```
+
+loops create a new scope on each iterator 
+
+```lua
+local t = {}
+
+for i = 1, 10 do 
+  t[i] = function() print(i) end
+end
+
+t[1]() ->1
+t[8]() ->8
+```
+
+### When to use local variables
+
+The general rule is to always use local variables, unless it's necessary for every part of your program to be able to access the variable (which is very rare).
+
+refer [this link](http://lua-users.org/wiki/ScopeTutorial) for more information.
+
+## MetaMethods
+
+A metatable is a regular Lua table containing a set of metamethods, which are associated with events in Lua. Events occur when Lua executes certain operations, like addition, string concatenation, comparisons etc. 
+Metamethods are regular Lua functions which are called when a specific event occurs. 
+
+### events
+
+#### __index
+
+This is very commonly used and versatile  metamethod, it lets you run a custom function or use a "fallback" table if a key in a table doesn't exist. If a function is used, its first parameter will be the table that the lookup failed on, and the second parameter will be the key. If a fallback table is used, remember that it can trigger an __index metamethod on it if it has one, so you can create long chains of fallback tables.
+
+```lua
+local func_example = setmetatable({}, { __index = function(t,key) 
+    t[k] = 1
+    return t[k]
+end})
+
+local fallback_tbl = setmetatable({foo = "bar", [123] = 456}, {__index= func_example})
+-- a chain of __index
+local fallback_example = setmetatable({}, {__index=fallback_tbl})
+
+print(func_example[1]) --> 1
+print(fallback_example.foo) --> bar
+print(fallback_example[123]) --> 456
+print(fallback_example[456]) --> 1
+
+```
+
+more info refer [this link](http://lua-users.org/wiki/MetamethodsTutorial)
+
+## Environments
+
+
