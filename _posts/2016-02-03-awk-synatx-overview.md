@@ -1,5 +1,6 @@
 ---
 title: Awk Synatx OverView
+toc: true
 updated: 2016-02-03  16:21
 ---
 
