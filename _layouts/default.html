@@ -6,6 +6,7 @@ layout: compress
 <html lang="en">
 
 	<head>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"> </script>
 		{% include head.html %}
 	</head>
 
@@ -30,5 +31,9 @@ layout: compress
 
 	<script type="text/javascript"
     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+$(document).ready(function () {
+	$("h5").nextUntil("h5").toggle();
+});
 	</script>
 </html>
