@@ -33,6 +33,7 @@ layout: compress
     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 
 $(document).ready(function () {
+	$("h5").nextUntil("h5").hide();
 	$("h5"). click(function() {
 		$(this).nextUntil("h5").fadeToggle()
 	});
