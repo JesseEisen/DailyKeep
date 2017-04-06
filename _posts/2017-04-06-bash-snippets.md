@@ -85,7 +85,7 @@ fi
 
 + straight bash equals separated
 
-```
+```bash
 for i in "$@"
 do
 case $i in
@@ -124,7 +124,7 @@ fi
 
 never use getopt, because cannot handle empty arguments strings, or arguments with embedded whitespace.
 
-```
+```bash
 #!/bin/sh
 
 # A POSIX variable
