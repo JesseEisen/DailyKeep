@@ -125,6 +125,61 @@ $ echo ${A/#/R}
 Rhello Rworld Ryeah
 ```
 
+## Parameter convert
+
+In Bash4, we can use those below:
+
++ To lowercase
+
+```bash
+$ string="A FEW WORDS"
+$ echo "${string,}"
+a FEW WORDS
+$ echo "${string,,}"
+a few words
+$ echo "${string,,[AEIUO]}"
+a FeW WoRDS
+
+$ string="A Few Words"
+$ declare -l string
+$ string=$string; echo "$string"
+a few words
+```
+
++ To uppercase
+
+```bash
+$ string="a few words"
+$ echo "${string^}"
+A few words
+$ echo "${string^^}"
+A FEW WORDS
+$ echo "${string^^[aeiou]}"
+A fEw wOrds
+
+$ string="A Few Words"
+$ declare -u string
+$ string=$string; echo "$string"
+A FEW WORDS
+```
+
++ Title case
+
+```bash
+$ string="a few words"
+$ string=($string)
+$ string="${string[@]^}"
+$ echo "$string"
+A Few Words
+
+$ declare -c string
+$ string=(a few words)
+$ echo "${string[@]}"
+A Few Words
+```
+
+**Noticy:** To turn off a `declare` attribute, use `+`. For example, `declare +c string`, This affects subsequent assignments and not the current value.
+
 ## Glob Patterns
 
 + `*`: matches any string, including the null string

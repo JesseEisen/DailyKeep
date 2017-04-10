@@ -257,4 +257,56 @@ tabby
 
 同时`eval` 也可以做到这个,即`eval \$$animal`,不过这个操作直接返回的是结果，因此不适合作为参数传入。不建议使用eval。
 
+##### 8. Set color for output
 
+使用`tput`来修改输出的颜色。 下面可以打印出一个颜色表，可以通过这个表来进行：
+
+```bash
+for (( i = 0; i < 8; i++ )); do
+	for (( j = 0; j < 8; j++ )); do
+		printf "$(tput setab $i)$(tput setaf $j)(b=$i, f=$j)$(tput sgr0)\n"
+	done
+done
+```
+
+下面可以是ANSI的转义码：
+
+```bash
+Black        0;30     Dark Gray     1;30
+Red          0;31     Light Red     1;31
+Green        0;32     Light Green   1;32
+Brown/Orange 0;33     Yellow        1;33
+Blue         0;34     Light Blue    1;34
+Purple       0;35     Light Purple  1;35
+Cyan         0;36     Light Cyan    1;36
+Light Gray   0;37     White         1;37
+```
+
+我们可以这样使用：
+
+```bash
+RED='\033[0;31m'
+NC='\033[0m'
+printf "I ${RED} LOVE ${NC} STACK OVERFLOW\n"
+```
+
+
+##### 9. Read content of a file
+
+在bash中读取一个文件，可以通过while循环，比如最简单的读取如下：
+
+```bash
+while read line; do
+	echo $line
+done < input.txt
+```
+
+如果遇到在循环体内又要从标准输入中读取内容的时候，可以使用如下方式：
+
+```bash
+while read -u 10 line; do
+	...
+done 10<input.txt
+```
+
+read的参数`-u`是用来指定一个文件描述符，这个描述符只要不等于(0,1,2)就行。
