@@ -312,5 +312,25 @@ done 10<input.txt
 read的参数`-u`是用来指定一个文件描述符，这个描述符只要不等于(0,1,2)就行。
 
 
+##### 10. Heredocument with expand variable
 
+在heredocument中可以保持变量不会被扩展，可以使用一个小的trick。 
+
+```bash
+cat << EOF >file
+good: $good
+nice: $nice
+EOF
+```
+
+如果`$good`和`$nice`没有赋值，则输出的结果为：
+
+```bash
+good:
+nice:
+```
+
+如果想保持这两个变量不被扩展和替换，可以在`EOF`上添加上引号即可。
+
+> No parameter expansion, command substitution, arithmetic expansion, or pathname expansion is performed on word. If any characters in word are quoted, the delimiter is the result of quote removal on word, and the lines in the here-document are not expanded. If word is unquoted, all lines of the here-document are subjected to parameter expansion, command substitution, and arithmetic expansion. In the latter case, the character sequence \ is ignored, and \ must be used to quote the characters \, $, and `
 
