@@ -3,6 +3,9 @@ title: Awk example collections
 updated: 2017-04-19 18:00
 ---
 
+### Features compare
+[table of features compare](http://awk.freeshell.org/AwkFeatureComparison)
+
 ##### Get the last field 
 
 `NF` refers to te number of fields of the current record, printing `$NF` means printing the last one
